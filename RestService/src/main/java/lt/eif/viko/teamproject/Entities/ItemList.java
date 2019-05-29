@@ -5,7 +5,10 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.net.URI;
 import java.util.List;
+import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
@@ -17,6 +20,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 public class ItemList {
 
     private List<Item> items = null;
+    private Link link;
 
     /**
      * Default constructor for ItemList
@@ -52,6 +56,24 @@ public class ItemList {
      */
     public void deleteFromList(Item item) {
         items.remove(item);
+    }
+
+    /**
+     * Get link uri
+     *
+     * @return uri of customer list
+     */
+    @JsonProperty("link")
+    public URI getLink() {
+        return link.getUri();
+    }
+
+    /**
+     * Method to set link
+     *
+     */
+    public void setLink(Link link) {
+        this.link = link;
     }
 
 }

@@ -5,10 +5,50 @@
  */
 package lt.eif.viko.teamproject.Service;
 
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+import org.jboss.resteasy.plugins.interceptors.CorsFilter;
+
 /**
- *
- * @author User
+ * Class used to register JAX-RS REST resource
+ * @author s028945
  */
-public class NetworkApplication {
-    
+@ApplicationPath("/rest")
+public class NetworkApplication extends Application {
+
+    private final Set<Object> singletons = new HashSet<>();
+    private final Set<Class<?>> empty = new HashSet<>();
+
+    /**
+     * NetworkApplication constructor that adds ....
+     *
+     */
+    public NetworkApplication() throws SQLException, ClassNotFoundException {
+        CorsFilter corsFilter = new CorsFilter();
+        corsFilter.getAllowedOrigins().add("*");
+        corsFilter.setAllowedMethods("OPTIONS, GET, POST, DELETE, PUT, PATCH");
+        singletons.add(corsFilter);
+        singletons.add(new DestinationsResource());
+    }
+
+    /**
+     * Method for getting Classes
+     *
+     */
+    @Override
+    public Set<Class<?>> getClasses() {
+        return empty;
+    }
+
+    /**
+     * Method for getting Singletons
+     *
+     */
+    @Override
+    public Set<Object> getSingletons() {
+        return singletons;
+    }
 }

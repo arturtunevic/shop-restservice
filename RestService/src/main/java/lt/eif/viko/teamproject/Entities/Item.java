@@ -5,6 +5,10 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.net.URI;
+import javax.ws.rs.core.Link;
+
 /**
  * This is Item entity, that contains information about item
  *
@@ -16,6 +20,7 @@ public class Item {
     private String itemName;
     private double itemPrice;
     private int itemQuantity;
+    private Link link;
 
     /**
      * This is default non-parameterized constructor of Item entity
@@ -118,6 +123,24 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" + "itemID=" + itemID + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemQuantity=" + itemQuantity + '}';
+    }
+
+    /**
+     * Get link uri
+     *
+     * @return uri of customer list
+     */
+    @JsonProperty("link")
+    public URI getLink() {
+        return link.getUri();
+    }
+
+    /**
+     * Method to set link
+     *
+     */
+    public void setLink(Link link) {
+        this.link = link;
     }
 
 }

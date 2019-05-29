@@ -5,6 +5,10 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.net.URI;
+import javax.ws.rs.core.Link;
+
 /**
  * This is Customer entity, that keeps information about customer
  *
@@ -15,6 +19,7 @@ public class Customer {
     private int customerID;
     private String name;
     private String surname;
+    private Link link;
 
     /**
      * This is empty default constructor
@@ -97,6 +102,24 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" + "customerID=" + customerID + ", name=" + name + ", surname=" + surname + '}';
+    }
+
+    /**
+     * Get link uri
+     *
+     * @return uri of customer
+     */
+    @JsonProperty("link")
+    public URI getLink() {
+        return link.getUri();
+    }
+
+    /**
+     * Method to set link
+     *
+     */
+    public void setLink(Link link) {
+        this.link = link;
     }
 
 }

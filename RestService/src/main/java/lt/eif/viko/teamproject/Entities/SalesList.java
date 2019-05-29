@@ -5,18 +5,22 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.net.URI;
 import java.util.List;
+import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 /**
  * This is SalesList Entity, that contains list of Sale
- * 
+ *
  * @author s028945
  */
 public class SalesList {
 
     private List<Sale> sales = null;
+    private Link link;
 
     /**
      * Default constructor for SalesList
@@ -52,6 +56,24 @@ public class SalesList {
      */
     public void deleteFromList(Sale sale) {
         sales.remove(sale);
+    }
+
+    /**
+     * Get link uri
+     *
+     * @return uri of customer list
+     */
+    @JsonProperty("link")
+    public URI getLink() {
+        return link.getUri();
+    }
+
+    /**
+     * Method to set link
+     *
+     */
+    public void setLink(Link link) {
+        this.link = link;
     }
 
 }
