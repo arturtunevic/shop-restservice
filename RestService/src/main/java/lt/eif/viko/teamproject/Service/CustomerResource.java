@@ -5,6 +5,7 @@
  */
 package lt.eif.viko.teamproject.Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -37,8 +38,8 @@ public class CustomerResource {
     /**
      * Default CustomerResource constructor
      */
-    public CustomerResource() {
-
+    public CustomerResource() throws ClassNotFoundException, SQLException{
+        dao= new CustomerDAO();
     }
 
     @Context
@@ -53,8 +54,11 @@ public class CustomerResource {
     public CustomerList getCustomers() {
 
         CustomerList customers = new CustomerList();
-        customers.setCustomers(dao.load());
-        
+        customers.setCustomers(new ArrayList());
+        for(Customer customer : dao.load()){
+            customers.getCustomers().add(customer);
+        } 
+       
         Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
         customers.setLink(link);
 

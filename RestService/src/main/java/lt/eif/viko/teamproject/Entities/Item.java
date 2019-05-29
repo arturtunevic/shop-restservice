@@ -123,10 +123,10 @@ public class Item {
      *
      * @return uri of customer list
      */
-    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
-    @XmlElement
-    public URI getLink() {
-        return link.getUri();
+    @XmlElement(name = "link")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class) 
+    public Link getLink() {
+        return link;
     }
 
     /**

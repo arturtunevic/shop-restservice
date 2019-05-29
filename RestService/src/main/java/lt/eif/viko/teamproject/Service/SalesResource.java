@@ -5,6 +5,8 @@
  */
 package lt.eif.viko.teamproject.Service;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -36,7 +38,8 @@ public class SalesResource {
     /**
      * Default constructor for sales resource
      */
-    public SalesResource() {
+    public SalesResource() throws SQLException, ClassNotFoundException{
+        dao=new SalesDAO();
 
     }
 
@@ -52,8 +55,11 @@ public class SalesResource {
     public SalesList getSales() {
 
         SalesList sales = new SalesList();
-        sales.setSales(dao.load());
-
+        sales.setSales(new ArrayList());
+        for(Sale sale : dao.load()){
+            sales.getSales().add(sale);
+        }
+        
         Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
         sales.setLink(link);
 

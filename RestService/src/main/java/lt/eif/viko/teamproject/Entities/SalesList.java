@@ -5,13 +5,13 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * This is SalesList Entity, that contains list of Sale
@@ -65,9 +65,10 @@ public class SalesList {
      *
      * @return uri of customer list
      */
-    @JsonProperty("link")
-    public URI getLink() {
-        return link.getUri();
+    @XmlElement(name = "link")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class) 
+    public Link getLink() {
+        return link;
     }
 
     /**

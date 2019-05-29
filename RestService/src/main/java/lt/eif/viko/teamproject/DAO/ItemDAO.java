@@ -48,10 +48,10 @@ public class ItemDAO implements DAO<Item> {
             Boolean next = resultSet.first();
             while (next == true) {
                 Item item = new Item();
-                item.setItemID(resultSet.getInt("item_ID"));
-                item.setItemName(resultSet.getString("item_name"));
+                item.setItemID(resultSet.getInt("Item_ID"));
+                item.setItemName(resultSet.getString("Item_name"));
                 item.setItemPrice(resultSet.getDouble("item_price"));
-                item.setItemQuantity(resultSet.getInt("item_quantity"));
+                item.setItemQuantity(resultSet.getInt("Item_quantity"));
                 items.add(item);
                 next = resultSet.next();
             }

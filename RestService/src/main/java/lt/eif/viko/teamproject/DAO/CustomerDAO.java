@@ -40,7 +40,7 @@ public class CustomerDAO implements DAO<Customer> {
     public List<Customer> load() {
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM Customer");
+            resultSet = statement.executeQuery("SELECT * FROM customer");
             Boolean next = resultSet.first();
             while (next == true) {
                 Customer customer = new Customer();
@@ -69,7 +69,7 @@ public class CustomerDAO implements DAO<Customer> {
         int idInt = (int) id;
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM Event WHERE ID = " + idInt);
+            resultSet = statement.executeQuery("SELECT * FROM customer WHERE ID = " + idInt);
             resultSet.first();
             Customer customer = new Customer();
             customer.setCustomerID(resultSet.getInt("ID"));
@@ -93,7 +93,7 @@ public class CustomerDAO implements DAO<Customer> {
     public void insert(Customer object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Customer VALUES (" + object.getCustomerID()+ ", '" + object.getName() + "'), '" + object.getSurname()+ "')");
+            statement.executeUpdate("INSERT INTO customer VALUES (" + object.getCustomerID()+ ", '" + object.getName() + "'), '" + object.getSurname()+ "')");
         } catch (SQLException ex) {
        
         }
@@ -108,7 +108,7 @@ public class CustomerDAO implements DAO<Customer> {
     public void update(Customer object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("UPDATE Customer SET Surname =" + object.getSurname() + ", Name=" + object.getName() + "' WHERE ID =" + object.getCustomerID());
+            statement.executeUpdate("UPDATE customer SET Surname =" + object.getSurname() + ", Name=" + object.getName() + "' WHERE ID =" + object.getCustomerID());
         } catch (SQLException ex) {
       
         }
@@ -123,7 +123,7 @@ public class CustomerDAO implements DAO<Customer> {
     public void delete(Customer object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("DELETE FROM Customer WHERE ID = " + object.getCustomerID());
+            statement.executeUpdate("DELETE FROM customer WHERE ID = " + object.getCustomerID());
         } catch (SQLException ex) {
            // Logger.getLogger(DAOCountryDb.class.getName()).log(Level.SEVERE, null, ex);
         }

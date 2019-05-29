@@ -5,6 +5,8 @@
  */
 package lt.eif.viko.teamproject.Service;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,7 +17,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Link;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
@@ -37,7 +38,8 @@ public class ItemsResource {
     /**
      * Default constructor for item resource
      */
-    public ItemsResource() {
+    public ItemsResource() throws SQLException, ClassNotFoundException {
+        dao=new ItemDAO();
 
     }
 
@@ -53,7 +55,10 @@ public class ItemsResource {
     public ItemList getItems() {
 
         ItemList items = new ItemList();
-        items.setItems(dao.load());
+        items.setItems(new ArrayList());
+        for(Item item : dao.load()){
+            items.getItems().add(item);
+        }
        
         Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
         items.setLink(link);
