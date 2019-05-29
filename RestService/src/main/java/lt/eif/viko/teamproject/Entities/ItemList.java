@@ -5,18 +5,20 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * This is entity that contains all items in list
  *
  * @author s028945
  */
+@XmlRootElement(name = "Items")
 public class ItemList {
 
     private List<Item> items = null;
@@ -63,7 +65,8 @@ public class ItemList {
      *
      * @return uri of customer list
      */
-    @JsonProperty("link")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
+    @XmlElement
     public URI getLink() {
         return link.getUri();
     }

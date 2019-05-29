@@ -5,21 +5,26 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.core.Link;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * This is sales Entity that contains information about purchase
  *
  * @author s028945
  */
+@XmlRootElement(name = "Sale")
 public class Sale {
 
     private int saleID;
     private Customer customer;
     private List<Item> items;
+    private int cartID;
     private String saleDate;
     private Link link;
 
@@ -38,10 +43,11 @@ public class Sale {
      * @param items
      * @param saleDate
      */
-    public Sale(int saleID, Customer customer, List<Item> items, String saleDate) {
+    public Sale(int saleID, Customer customer, List<Item> items, String saleDate, int cartID) {
         this.saleID = saleID;
         this.customer = customer;
         this.items = items;
+        this.cartID = cartID;
         this.saleDate = saleDate;
     }
 
@@ -52,6 +58,33 @@ public class Sale {
      */
     public int getSaleID() {
         return saleID;
+    }
+
+    /**
+     * This method is used to set cart ID
+     *
+     * @param id id of cart
+     */
+    public void setCartID(int id) {
+        cartID = id;
+    }
+
+    /**
+     * This method returns id of cart
+     *
+     * @return id of cart
+     */
+    public int getCartID() {
+        return cartID;
+    }
+
+    /**
+     * This method returns id of customer
+     *
+     * @return id of customer
+     */
+    public int getCustomerID() {
+        return customer.getCustomerID();
     }
 
     /**
@@ -86,6 +119,8 @@ public class Sale {
      *
      * @return list of items
      */
+    @XmlElementWrapper(name = "Items")
+    @XmlElement(name = "Item")
     public List<Item> getItems() {
         return items;
     }
@@ -133,7 +168,8 @@ public class Sale {
      *
      * @return uri of customer list
      */
-    @JsonProperty("link")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
+    @XmlElement
     public URI getLink() {
         return link.getUri();
     }

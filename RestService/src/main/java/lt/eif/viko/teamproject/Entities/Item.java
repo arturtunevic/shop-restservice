@@ -5,15 +5,18 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.net.URI;
 import javax.ws.rs.core.Link;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * This is Item entity, that contains information about item
  *
  * @author s028945
  */
+@XmlRootElement(name = "Item")
 public class Item {
 
     private int itemID;
@@ -116,21 +119,12 @@ public class Item {
     }
 
     /**
-     * This is toString method for Item
-     *
-     * @return item information
-     */
-    @Override
-    public String toString() {
-        return "Item{" + "itemID=" + itemID + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemQuantity=" + itemQuantity + '}';
-    }
-
-    /**
      * Get link uri
      *
      * @return uri of customer list
      */
-    @JsonProperty("link")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
+    @XmlElement
     public URI getLink() {
         return link.getUri();
     }

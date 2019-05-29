@@ -5,6 +5,8 @@
  */
 package lt.eif.viko.teamproject.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+import lt.eif.viko.teamproject.DAO.CustomerDAO;
 import lt.eif.viko.teamproject.Entities.Customer;
 import lt.eif.viko.teamproject.Entities.CustomerList;
 
@@ -27,9 +30,10 @@ import lt.eif.viko.teamproject.Entities.CustomerList;
  * @author s028945
  */
 @Path("/customers")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces("application/xml")
 public class CustomerResource {
 
+    CustomerDAO dao;
     /**
      * Default CustomerResource constructor
      */
@@ -48,8 +52,9 @@ public class CustomerResource {
     @GET
     public CustomerList getCustomers() {
 
-        CustomerList customers = dao.getCustomers();
-
+        CustomerList customers = new CustomerList();
+        customers.setCustomers(dao.load());
+        
         Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
         customers.setLink(link);
 
@@ -83,9 +88,9 @@ public class CustomerResource {
      * @return a response that customer was inserted
      */
     @POST
-    @Consumes("application/json")
+    @Consumes("application/xml")
     public Response createCustomer(Customer customer) {
-        dao.createCustomer(customer);
+        dao.insert(customer);
         Link lnk = Link.fromUri(uriInfo.getPath() + "/" + customer.getCustomerID()).rel("self").build();
         return Response.status(javax.ws.rs.core.Response.Status.CREATED).location(lnk.getUri()).build();
     }

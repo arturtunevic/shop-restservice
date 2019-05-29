@@ -18,6 +18,7 @@ import javax.ws.rs.core.Link;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import lt.eif.viko.teamproject.DAO.SalesDAO;
 import lt.eif.viko.teamproject.Entities.Sale;
 import lt.eif.viko.teamproject.Entities.SalesList;
 
@@ -27,9 +28,11 @@ import lt.eif.viko.teamproject.Entities.SalesList;
  * @author s028945
  */
 @Path("/sales")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces("application/xml")
 public class SalesResource {
 
+    SalesDAO dao;
+    
     /**
      * Default constructor for sales resource
      */
@@ -48,7 +51,8 @@ public class SalesResource {
     @GET
     public SalesList getSales() {
 
-        SalesList sales = dao.getSales();
+        SalesList sales = new SalesList();
+        sales.setSales(dao.load());
 
         Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
         sales.setLink(link);
@@ -67,9 +71,9 @@ public class SalesResource {
      * @return a response that Sale was inserted
      */
     @POST
-    @Consumes("application/json")
+    @Consumes("application/xml")
     public Response createItem(Sale sale) {
-        dao.createSale(sale);
+        dao.insert(sale);
         Link lnk = Link.fromUri(uriInfo.getPath() + "/" + sale.getSaleID()).rel("self").build();
         return Response.status(javax.ws.rs.core.Response.Status.CREATED).location(lnk.getUri()).build();
     }
@@ -97,7 +101,7 @@ public class SalesResource {
      */
     @PUT
     @Path("/{saleID}")
-    @Consumes("application/json")
+    @Consumes("application/xml")
     public Response updateCountry(Sale sale) {
         dao.update(sale);
         return Response.status((javax.ws.rs.core.Response.Status.OK)).build();

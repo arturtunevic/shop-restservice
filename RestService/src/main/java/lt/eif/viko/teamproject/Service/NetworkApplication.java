@@ -14,6 +14,7 @@ import org.jboss.resteasy.plugins.interceptors.CorsFilter;
 
 /**
  * Class used to register JAX-RS REST resource
+ *
  * @author s028945
  */
 @ApplicationPath("/rest")
@@ -31,7 +32,9 @@ public class NetworkApplication extends Application {
         corsFilter.getAllowedOrigins().add("*");
         corsFilter.setAllowedMethods("OPTIONS, GET, POST, DELETE, PUT, PATCH");
         singletons.add(corsFilter);
-        singletons.add(new DestinationsResource());
+        singletons.add(new CustomerResource());
+        singletons.add(new ItemsResource());
+        singletons.add(new SalesResource());
     }
 
     /**

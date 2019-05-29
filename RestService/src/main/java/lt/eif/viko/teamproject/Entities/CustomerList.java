@@ -6,17 +6,22 @@
 package lt.eif.viko.teamproject.Entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * This entity is used to store customer's in a list
  *
  * @author s028945
  */
+@XmlRootElement(name = "Customers")
 public class CustomerList {
 
     private List<Customer> customers = null;
@@ -45,7 +50,7 @@ public class CustomerList {
      *
      * @param customers list of customers
      */
-    public void setVehicles(List<Customer> customers) {
+    public void setCustomers(List<Customer> customers) {
         this.customers = customers;
     }
 
@@ -63,7 +68,8 @@ public class CustomerList {
      *
      * @return uri of customer list
      */
-    @JsonProperty("link")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
+    @XmlElement
     public URI getLink() {
         return link.getUri();
     }

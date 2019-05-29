@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+import lt.eif.viko.teamproject.DAO.ItemDAO;
 import lt.eif.viko.teamproject.Entities.Item;
 import lt.eif.viko.teamproject.Entities.ItemList;
 
@@ -28,9 +29,11 @@ import lt.eif.viko.teamproject.Entities.ItemList;
  * @author s028945
  */
 @Path("/items")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces("application/xml")
 public class ItemsResource {
 
+    ItemDAO dao;
+   
     /**
      * Default constructor for item resource
      */
@@ -49,8 +52,9 @@ public class ItemsResource {
     @GET
     public ItemList getItems() {
 
-        ItemList items = dao.getItems();
-
+        ItemList items = new ItemList();
+        items.setItems(dao.load());
+       
         Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
         items.setLink(link);
 
@@ -84,9 +88,9 @@ public class ItemsResource {
      * @return a response that Item was inserted
      */
     @POST
-    @Consumes("application/json")
+    @Consumes("application/xml")
     public Response createItem(Item item) {
-        dao.createItem(item);
+        dao.insert(item);
         Link lnk = Link.fromUri(uriInfo.getPath() + "/" + item.getItemID()).rel("self").build();
         return Response.status(javax.ws.rs.core.Response.Status.CREATED).location(lnk.getUri()).build();
     }
@@ -114,7 +118,7 @@ public class ItemsResource {
      */
     @PUT
     @Path("/{itemID}")
-    @Consumes("application/json")
+    @Consumes("application/xml")
     public Response updateCountry(Item item) {
         dao.update(item);
         return Response.status((javax.ws.rs.core.Response.Status.OK)).build();
