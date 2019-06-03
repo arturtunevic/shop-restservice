@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 03, 2019 at 02:38 PM
+-- Generation Time: Jun 03, 2019 at 05:07 PM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `Item_ID` int(11) NOT NULL,
   `Sale_ID` int(11) NOT NULL,
   PRIMARY KEY (`Cart_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cart`
@@ -43,7 +43,10 @@ CREATE TABLE IF NOT EXISTS `cart` (
 
 INSERT INTO `cart` (`Cart_ID`, `Quantity`, `Item_ID`, `Sale_ID`) VALUES
 (1, 2, 1, 1),
-(2, 45, 5, 1);
+(2, 45, 5, 1),
+(3, 50, 3, 2),
+(4, 499, 6, 2),
+(5, 151, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -57,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `Name` varchar(255) NOT NULL,
   `Surname` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
@@ -66,7 +69,8 @@ CREATE TABLE IF NOT EXISTS `customer` (
 INSERT INTO `customer` (`ID`, `Name`, `Surname`) VALUES
 (1, 'Tomas', 'Dubininkas'),
 (2, 'Artur', 'Tunevic'),
-(3, 'Gintautas', 'Cepas');
+(3, 'Gintautas', 'Cepas'),
+(5, 'I CHANGEDIT', 'OJJ');
 
 -- --------------------------------------------------------
 
@@ -81,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `item_price` double NOT NULL,
   `Item_quantity` int(11) NOT NULL,
   PRIMARY KEY (`Item_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `item`
@@ -92,7 +96,7 @@ INSERT INTO `item` (`Item_ID`, `Item_name`, `item_price`, `Item_quantity`) VALUE
 (2, 'Computer fan Rx3000', 11.42, 155),
 (3, 'APPLE MacBook Pro 13', 3420.9, 50),
 (4, 'Apple IIe', 5600.5, 5),
-(5, 'Lenovo y50-70', 720.9, 69);
+(6, 'Makintosh', 999.9, 240);
 
 -- --------------------------------------------------------
 
@@ -106,14 +110,16 @@ CREATE TABLE IF NOT EXISTS `sales` (
   `Sales_Date` date NOT NULL,
   `Customer_ID` int(11) NOT NULL,
   PRIMARY KEY (`Sale_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sales`
 --
 
 INSERT INTO `sales` (`Sale_ID`, `Sales_Date`, `Customer_ID`) VALUES
-(1, '2019-05-09', 1);
+(1, '2019-05-09', 1),
+(2, '2019-06-01', 2),
+(3, '2019-04-10', 3);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
