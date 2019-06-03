@@ -101,7 +101,7 @@ public class SalesDAO implements DAO<Sale> {
     public void insert(Sale object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO sale VALUES (" + object.getSaleID() + ", DATE('" + object.getSaleDate() + "'), '" + object.getCustomer() + '"');
+            statement.executeUpdate("INSERT INTO sales VALUES (" + object.getSaleID() + ", DATE('" + object.getSaleDate() + "'), " + object.getCustomer() + ")");
         } catch (SQLException ex) {
             Logger.getLogger(SalesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,7 +116,7 @@ public class SalesDAO implements DAO<Sale> {
     public void update(Sale object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("UPDATE SET Customer_ID=" + object.getCustomer() + ", Sales_Date=DATE('" + object.getSaleDate() + "')  WHERE Item_ID =" + object.getSaleID());
+            statement.executeUpdate("UPDATE sales SET Customer_ID=" + object.getCustomer() + ", Sales_Date=DATE('" + object.getSaleDate() + "')  WHERE Item_ID =" + object.getSaleID());
         } catch (SQLException ex) {
             Logger.getLogger(SalesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -131,7 +131,7 @@ public class SalesDAO implements DAO<Sale> {
     public void delete(Sale object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("DELETE FROM sale WHERE Sale_ID = " + object.getSaleID());
+            statement.executeUpdate("DELETE FROM sales WHERE Sale_ID = " + object.getSaleID());
         } catch (SQLException ex) {
             Logger.getLogger(SalesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

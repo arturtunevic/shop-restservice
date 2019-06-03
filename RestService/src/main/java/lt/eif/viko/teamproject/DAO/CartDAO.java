@@ -65,6 +65,32 @@ public class CartDAO implements DAO<Cart> {
     }
 
     /**
+     * Method used to get all items by sale ID
+     *
+     * @return list of all items
+     */
+    public List<Cart> loadBySale(int saleID) {
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM cart WHERE Sale_ID= " + saleID );
+            Boolean next = resultSet.first();
+            while (next == true) {
+                Cart cart = new Cart();
+                cart.setCartID(resultSet.getInt("Cart_ID"));
+                cart.setQuantity(resultSet.getInt("Quantity"));
+                cart.setItemID(resultSet.getInt("Item_ID"));
+                cart.setSaleID(resultSet.getInt("Sale_ID"));
+                cItems.add(cart);
+                next = resultSet.next();
+            }
+            return cItems;
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    /**
      * Method used to retrieve specific Cart by ID
      *
      * @param id cart id
@@ -100,7 +126,7 @@ public class CartDAO implements DAO<Cart> {
     public void insert(Cart object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO cart VALUES (" + object.getCartID() + ", '" + object.getQuantity() + "', " + object.getItemID() + ", '" + object.getSaleID() + '"');
+            statement.executeUpdate("INSERT INTO cart VALUES (" + object.getCartID() + ", " + object.getQuantity() + ", " + object.getItemID() + ", " + object.getSaleID() + ")");
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,7 +141,7 @@ public class CartDAO implements DAO<Cart> {
     public void update(Cart object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("UPDATE SET Quantity =" + object.getQuantity() + " WHERE Cart_ID =" + object.getCartID());
+            statement.executeUpdate("UPDATE cart SET Quantity =" + object.getQuantity() + " WHERE Cart_ID =" + object.getCartID());
         } catch (SQLException ex) {
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

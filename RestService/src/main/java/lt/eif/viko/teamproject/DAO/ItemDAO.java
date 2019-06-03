@@ -101,7 +101,7 @@ public class ItemDAO implements DAO<Item> {
     public void insert(Item object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Item VALUES (" + object.getItemID() + ", '" + object.getItemName() + "', '" + object.getItemPrice() + "', '" + object.getItemQuantity() + '"');
+            statement.executeUpdate("INSERT INTO Item VALUES (" + object.getItemID() + ", '" + object.getItemName() + "', " + object.getItemPrice() + ", " + object.getItemQuantity() + ")");
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,7 +116,7 @@ public class ItemDAO implements DAO<Item> {
     public void update(Item object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("UPDATE SET item_price =" + object.getItemPrice() + ", Item_quantity=" + object.getItemQuantity() + " WHERE Item_ID =" + object.getItemID());
+            statement.executeUpdate("UPDATE item SET item_price =" + object.getItemPrice() + ", Item_quantity=" + object.getItemQuantity() + " WHERE Item_ID =" + object.getItemID());
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

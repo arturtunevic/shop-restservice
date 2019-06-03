@@ -69,7 +69,7 @@ public class CartResource {
     @GET
     public List<Cart> loadCart() {
         List<Cart> cartList = new ArrayList<>();
-        cartList = dao.load();
+        cartList = dao.loadBySale(saleID);
 
         UriBuilder builder = UriBuilder.fromResource(SalesResource.class)
                 .path(SalesResource.class, "getSaleByID");

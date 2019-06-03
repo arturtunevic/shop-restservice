@@ -97,7 +97,7 @@ public class CustomerDAO implements DAO<Customer> {
     public void insert(Customer object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO customer VALUES (" + object.getCustomerID() + ", '" + object.getName() + "'), '" + object.getSurname() + "')");
+            statement.executeUpdate("INSERT INTO customer VALUES (" + object.getCustomerID() + ",'" + object.getName() + "', '" + object.getSurname() + "')");
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -112,7 +112,7 @@ public class CustomerDAO implements DAO<Customer> {
     public void update(Customer object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("UPDATE customer SET Surname =" + object.getSurname() + ", Name=" + object.getName() + "' WHERE ID =" + object.getCustomerID());
+            statement.executeUpdate("UPDATE customer SET Surname ='" + object.getSurname() + "', Name='" + object.getName() + "' WHERE ID =" + object.getCustomerID());
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
