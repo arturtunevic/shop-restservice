@@ -1,0 +1,510 @@
+{
+	"info": {
+		"_postman_id": "49eac99f-7145-4a92-80d6-0c234e148785",
+		"name": "Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/RestService/rest/customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/customers",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "        \n<Customer>\n    <customerID>0</customerID>\n    <name>Geh</name>\n    <surname>Hrd</surname>\n</Customer>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/customers/4",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/customers/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"customers",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/customers/5",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "        \n<Customer>\n\t<customerID>5</customerID>\n    <name>I CHANGEDIT</name>\n    <surname>OJJ</surname>\n</Customer>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/customers/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"customers",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/items/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"items",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/items/4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/items/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"items",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/items",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Item>\n    <itemID>0</itemID>\n    <itemName>Makintosh</itemName>\n    <itemPrice>9999.9</itemPrice>\n    <itemQuantity>420</itemQuantity>\n</Item>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/items/5",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/items/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"items",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/items/6",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<Item>\n    <itemID>6</itemID>\n    <itemName>Makintosh</itemName>\n    <itemPrice>999.9</itemPrice>\n    <itemQuantity>240</itemQuantity>\n</Item>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/items/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"items",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/sales",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/sales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"sales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/sales/1/cart",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/sales/1/cart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"sales",
+						"1",
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/sales/1/cart/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/sales/1/cart/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"sales",
+						"1",
+						"cart",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/sales",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "        \n<Sale>\n    <saleID>0</saleID>\n    <customer>2</customer>\n    <saleDate>2019-06-01</saleDate>\n</Sale>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/sales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"sales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/sales/4",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/sales/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"sales",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/sales/2/cart",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    <Cart>\n        <cartID>0</cartID>\n        <itemID>3</itemID>\n        <quantity>50</quantity>\n        <saleID>2</saleID>\n    </Cart>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/sales/2/cart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"sales",
+						"2",
+						"cart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/sales/2/cart/4",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    <Cart>\n        <cartID>4</cartID>\n        <itemID>6</itemID>\n        <quantity>499</quantity>\n        <saleID>2</saleID>\n    </Cart>"
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/sales/2/cart/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"sales",
+						"2",
+						"cart",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/RestService/rest/sales/2/cart/6",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/RestService/rest/sales/2/cart/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RestService",
+						"rest",
+						"sales",
+						"2",
+						"cart",
+						"6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
