@@ -1,0 +1,110 @@
+<application xmlns="http://wadl.dev.java.net/2009/02">
+	<resources base="http://localhost:8080/RestService"/>
+	<resources base="http://localhost:8080/RestService/rest">
+		<resource path="/items">
+			<method id="createItem" name="POST">
+				<response>
+					<representation mediaType="application/xml"/>
+				</response>
+			</method>
+			<method id="getItems" name="GET">
+				<response>
+					<representation mediaType="application/xml"/>
+				</response>
+			</method>
+			<resource path="/{itemID}">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="itemID" style="template" type="xs:int"/>
+				<method id="deleteItem" name="DELETE">
+					<response>
+						<representation mediaType="application/xml"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/{itemID}">
+				<method id="updateItem" name="PUT">
+					<response>
+						<representation mediaType="application/xml"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/{itemID}">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="itemID" style="template" type="xs:int"/>
+				<method id="getItemByID" name="GET">
+					<response>
+						<representation mediaType="application/xml"/>
+					</response>
+				</method>
+			</resource>
+		</resource>
+		<resource path="/sales">
+			<method id="createSale" name="POST">
+				<response>
+					<representation mediaType="application/xml"/>
+				</response>
+			</method>
+			<method id="getSales" name="GET">
+				<response>
+					<representation mediaType="application/xml"/>
+				</response>
+			</method>
+			<resource path="/{saleID}">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="saleID" style="template" type="xs:int"/>
+				<method id="deleteSale" name="DELETE">
+					<response>
+						<representation mediaType="application/xml"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/{saleID}">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="saleID" style="template" type="xs:int"/>
+				<method id="getSaleByID" name="GET">
+					<response>
+						<representation mediaType="application/xml"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/{saleID}">
+				<method id="updateSale" name="PUT">
+					<response>
+						<representation mediaType="application/xml"/>
+					</response>
+				</method>
+			</resource>
+		</resource>
+		<resource path="/customers">
+			<resource path="/{customerID}">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="customerID" style="template" type="xs:int"/>
+				<method id="getCustomerByID" name="GET">
+					<response>
+						<representation mediaType="application/xml"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/{customerID}">
+				<param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="customerID" style="template" type="xs:int"/>
+				<method id="deleteCustomer" name="DELETE">
+					<response>
+						<representation mediaType="application/xml"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/{customerID}">
+				<method id="updateCustomer" name="PUT">
+					<response>
+						<representation mediaType="application/xml"/>
+					</response>
+				</method>
+			</resource>
+			<method id="getCustomers" name="GET">
+				<response>
+					<representation mediaType="application/xml"/>
+				</response>
+			</method>
+			<method id="createCustomer" name="POST">
+				<response>
+					<representation mediaType="application/xml"/>
+				</response>
+			</method>
+		</resource>
+	</resources>
+</application>
