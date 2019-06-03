@@ -1,0 +1,398 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "API",
+    "description": "",
+    "contact": {}
+  },
+  "host": "localhost:8080",
+  "basePath": "/RestService/rest",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/items": {
+      "post": {
+        "description": "",
+        "summary": "createItem",
+        "operationId": "ItemsPost",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "summary": "getItems",
+        "operationId": "ItemsGet",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/items/{itemID}": {
+      "delete": {
+        "description": "",
+        "summary": "deleteItem",
+        "operationId": "ItemsByItemIDDelete",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "itemID",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "summary": "getItemByID",
+        "operationId": "ItemsByItemIDGet",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "itemID",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "summary": "updateItem",
+        "operationId": "ItemsByItemIDPut",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "itemID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/sales": {
+      "get": {
+        "description": "",
+        "summary": "getSales",
+        "operationId": "SalesGet",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "summary": "createSale",
+        "operationId": "SalesPost",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/sales/{saleID}": {
+      "delete": {
+        "description": "",
+        "summary": "deleteSale",
+        "operationId": "SalesBySaleIDDelete",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "saleID",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "summary": "updateSale",
+        "operationId": "SalesBySaleIDPut",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "saleID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "summary": "getSaleByID",
+        "operationId": "SalesBySaleIDGet",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "saleID",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/customers/{customerID}": {
+      "put": {
+        "description": "",
+        "summary": "updateCustomer",
+        "operationId": "CustomersByCustomerIDPut",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "customerID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "summary": "getCustomerByID",
+        "operationId": "CustomersByCustomerIDGet",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "customerID",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "summary": "deleteCustomer",
+        "operationId": "CustomersByCustomerIDDelete",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "customerID",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/customers": {
+      "get": {
+        "description": "",
+        "summary": "getCustomers",
+        "operationId": "CustomersGet",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "summary": "createCustomer",
+        "operationId": "CustomersPost",
+        "deprecated": false,
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
