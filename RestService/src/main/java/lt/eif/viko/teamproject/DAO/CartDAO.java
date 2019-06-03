@@ -10,24 +10,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lt.eif.viko.teamproject.Entities.Cart;
-import lt.eif.viko.teamproject.Entities.Item;
 
 /**
  * This class is used to manage Cart data in database
  *
  * @author s028945
+ * @author Tomas
+ * @author Gintas
  */
 public class CartDAO implements DAO<Cart> {
 
     private final Connection connection;
     private Statement statement = null;
     private ResultSet resultSet = null;
-    ItemDAO iDao = new ItemDAO();
     List<Cart> cItems = new ArrayList<>();
-    List<Item> items = new ArrayList<>();
 
     /**
      * Default constructor for Sales DAO
@@ -42,6 +42,7 @@ public class CartDAO implements DAO<Cart> {
      *
      * @return list of all items
      */
+    @Override
     public List<Cart> load() {
         try {
             statement = connection.createStatement();
@@ -51,13 +52,14 @@ public class CartDAO implements DAO<Cart> {
                 Cart cart = new Cart();
                 cart.setCartID(resultSet.getInt("Cart_ID"));
                 cart.setQuantity(resultSet.getInt("Quantity"));
-                cart.setItemID(resultSet.getInt("item_ID"));
+                cart.setItemID(resultSet.getInt("Item_ID"));
+                cart.setSaleID(resultSet.getInt("Sale_ID"));
                 cItems.add(cart);
                 next = resultSet.next();
             }
             return cItems;
         } catch (SQLException ex) {
-
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -78,31 +80,13 @@ public class CartDAO implements DAO<Cart> {
             Cart cart = new Cart();
             cart.setCartID(resultSet.getInt("Cart_ID"));
             cart.setQuantity(resultSet.getInt("Quantity"));
-            cart.setItemID(resultSet.getInt("item_ID"));
+            cart.setItemID(resultSet.getInt("Item_ID"));
+            cart.setSaleID(resultSet.getInt("Sale_ID"));
+
             return cart;
 
         } catch (SQLException ex) {
-            //    Logger.getLogger(DAOCountryDb.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-
-    public List<Item> getItems(Object id) {
-        int idInt = (int) id;
-        Item item;
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT Item_ID FROM cart WHERE Cart_ID = " + idInt);
-            Boolean next = resultSet.first();
-            while (next == true) {
-                item=iDao.get(resultSet.getInt("Item_ID"));
-                items.add(item);
-                next = resultSet.next();
-            }
-            return items;
-
-        } catch (SQLException ex) {
-            //    Logger.getLogger(DAOCountryDb.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -116,9 +100,9 @@ public class CartDAO implements DAO<Cart> {
     public void insert(Cart object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO cart VALUES (" + object.getCartID() + ", '" + object.getQuantity() + "', '" + object.getItemID() + '"');
+            statement.executeUpdate("INSERT INTO cart VALUES (" + object.getCartID() + ", '" + object.getQuantity() + "', " + object.getItemID() + ", '" + object.getSaleID() + '"');
         } catch (SQLException ex) {
-
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -133,7 +117,7 @@ public class CartDAO implements DAO<Cart> {
             statement = connection.createStatement();
             statement.executeUpdate("UPDATE SET Quantity =" + object.getQuantity() + " WHERE Cart_ID =" + object.getCartID());
         } catch (SQLException ex) {
-
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -148,7 +132,7 @@ public class CartDAO implements DAO<Cart> {
             statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM cart WHERE Cart_ID = " + object.getCartID());
         } catch (SQLException ex) {
-            // Logger.getLogger(DAOCountryDb.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

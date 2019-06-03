@@ -6,7 +6,6 @@
 package lt.eif.viko.teamproject.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,19 +26,19 @@ import lt.eif.viko.teamproject.Entities.ItemList;
 /**
  * Class to represent an object of class Items as a resource for rest service
  *
- * @author s028945
+ * @author Tomas
  */
 @Path("/items")
 @Produces("application/xml")
 public class ItemsResource {
 
     ItemDAO dao;
-   
+
     /**
      * Default constructor for item resource
      */
     public ItemsResource() throws SQLException, ClassNotFoundException {
-        dao=new ItemDAO();
+        dao = new ItemDAO();
 
     }
 
@@ -52,14 +51,11 @@ public class ItemsResource {
      * @return list of all items
      */
     @GET
-    public ItemList getItems() {
+    public ItemList getItems() throws SQLException, ClassNotFoundException {
 
+        dao = new ItemDAO();
         ItemList items = new ItemList();
-        items.setItems(new ArrayList());
-        for(Item item : dao.load()){
-            items.getItems().add(item);
-        }
-       
+        items.setItems(dao.load());
         Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
         items.setLink(link);
 
@@ -124,7 +120,7 @@ public class ItemsResource {
     @PUT
     @Path("/{itemID}")
     @Consumes("application/xml")
-    public Response updateCountry(Item item) {
+    public Response updateItem(Item item) {
         dao.update(item);
         return Response.status((javax.ws.rs.core.Response.Status.OK)).build();
     }

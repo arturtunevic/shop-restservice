@@ -6,8 +6,6 @@
 package lt.eif.viko.teamproject.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,7 +15,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Link;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
@@ -35,11 +32,12 @@ import lt.eif.viko.teamproject.Entities.CustomerList;
 public class CustomerResource {
 
     CustomerDAO dao;
+
     /**
      * Default CustomerResource constructor
      */
-    public CustomerResource() throws ClassNotFoundException, SQLException{
-        dao= new CustomerDAO();
+    public CustomerResource() throws ClassNotFoundException, SQLException {
+        dao = new CustomerDAO();
     }
 
     @Context
@@ -49,16 +47,16 @@ public class CustomerResource {
      * This method is used to retrieve list of all customers
      *
      * @return list of all customers
+     * @throws java.sql.SQLException sql exception
+     * @throws java.lang.ClassNotFoundException class not found exception
      */
     @GET
-    public CustomerList getCustomers() {
+    public CustomerList getCustomers() throws SQLException, ClassNotFoundException {
 
+        dao = new CustomerDAO();
         CustomerList customers = new CustomerList();
-        customers.setCustomers(new ArrayList());
-        for(Customer customer : dao.load()){
-            customers.getCustomers().add(customer);
-        } 
-       
+        customers.setCustomers(dao.load());
+
         Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
         customers.setLink(link);
 
@@ -89,6 +87,7 @@ public class CustomerResource {
     /**
      * Method used to create new Customer and insert it into database
      *
+     * @param customer object that we are inserting
      * @return a response that customer was inserted
      */
     @POST

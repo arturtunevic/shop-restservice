@@ -5,10 +5,10 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
-import java.net.URI;
 import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * @author s028945
  */
 @XmlRootElement(name = "Item")
+@XmlType(propOrder = {"itemID", "itemName", "itemPrice", "itemQuantity", "link"})
 public class Item {
 
     private int itemID;
@@ -29,21 +30,6 @@ public class Item {
      * This is default non-parameterized constructor of Item entity
      */
     public Item() {
-    }
-
-    /**
-     * This is parameterized constructor of Item entity
-     *
-     * @param itemID contains item ID
-     * @param itemName contains item name
-     * @param itemPrice contains item price
-     * @param itemQuantity contains item quantity
-     */
-    public Item(int itemID, String itemName, double itemPrice, int itemQuantity) {
-        this.itemID = itemID;
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.itemQuantity = itemQuantity;
     }
 
     /**

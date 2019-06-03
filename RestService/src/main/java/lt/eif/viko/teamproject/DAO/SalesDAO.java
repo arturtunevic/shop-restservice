@@ -12,8 +12,8 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import lt.eif.viko.teamproject.Entities.Item;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lt.eif.viko.teamproject.Entities.Sale;
 
 /**
@@ -27,8 +27,6 @@ public class SalesDAO implements DAO<Sale> {
     private Statement statement = null;
     private ResultSet resultSet = null;
     List<Sale> sales = new ArrayList<>();
-    CustomerDAO custDao = new CustomerDAO();
-    CartDAO crtDao = new CartDAO();
 
     /**
      * Default constructor for Sales DAO
@@ -43,6 +41,7 @@ public class SalesDAO implements DAO<Sale> {
      *
      * @return list of sales
      */
+    @Override
     public List<Sale> load() {
         try {
             statement = connection.createStatement();
@@ -54,14 +53,14 @@ public class SalesDAO implements DAO<Sale> {
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 String strDate = formatter.format(resultSet.getDate("Sales_Date"));
                 sale.setSaleDate(strDate);
-                sale.setCustomer(custDao.get(resultSet.getInt("Customer_ID")));
-                sale.setItems(crtDao.getItems(resultSet.getInt("Cart_ID")));
+                sale.setCustomer(resultSet.getInt("Customer_ID"));
+                //sale.setItems(crtDao.getItems(resultSet.getInt("Sale_ID")));
                 sales.add(sale);
                 next = resultSet.next();
             }
             return sales;
         } catch (SQLException ex) {
-
+            Logger.getLogger(SalesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -77,21 +76,18 @@ public class SalesDAO implements DAO<Sale> {
         int idInt = (int) id;
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM item WHERE Item_ID = " + idInt);
+            resultSet = statement.executeQuery("SELECT * FROM sales WHERE Sale_ID = " + idInt);
             resultSet.first();
             Sale sale = new Sale();
             sale.setSaleID(resultSet.getInt("Sale_ID"));
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String strDate = formatter.format(resultSet.getDate("Sales_Date"));
             sale.setSaleDate(strDate);
-            sale.setCustomer(custDao.get(resultSet.getInt("Customer_ID")));
-            sale.setItems(crtDao.getItems(resultSet.getInt("Cart_ID")));
-            sale.setCartID(resultSet.getInt("Cart_ID"));
-
+            sale.setCustomer(resultSet.getInt("Customer_ID"));
             return sale;
 
         } catch (SQLException ex) {
-            //    Logger.getLogger(DAOCountryDb.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -105,9 +101,9 @@ public class SalesDAO implements DAO<Sale> {
     public void insert(Sale object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO sale VALUES (" + object.getSaleID() + ", DATE('" + object.getSaleDate() + "'), '" + object.getCustomerID() + "', '" + object.getCartID() + '"');
+            statement.executeUpdate("INSERT INTO sale VALUES (" + object.getSaleID() + ", DATE('" + object.getSaleDate() + "'), '" + object.getCustomer() + '"');
         } catch (SQLException ex) {
-
+            Logger.getLogger(SalesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -120,9 +116,9 @@ public class SalesDAO implements DAO<Sale> {
     public void update(Sale object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("UPDATE SET Customer_ID=" + object.getCustomerID() + ", Sales_Date=DATE('" + object.getSaleDate() + "')  WHERE Item_ID =" + object.getSaleID());
+            statement.executeUpdate("UPDATE SET Customer_ID=" + object.getCustomer() + ", Sales_Date=DATE('" + object.getSaleDate() + "')  WHERE Item_ID =" + object.getSaleID());
         } catch (SQLException ex) {
-
+            Logger.getLogger(SalesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -137,7 +133,7 @@ public class SalesDAO implements DAO<Sale> {
             statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM sale WHERE Sale_ID = " + object.getSaleID());
         } catch (SQLException ex) {
-            // Logger.getLogger(DAOCountryDb.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

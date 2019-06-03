@@ -14,6 +14,7 @@ import java.util.Properties;
 /**
  * Class is for getting DB connection
  * @author Tomas
+ * @author Gintas
  */
 public class Database {
     

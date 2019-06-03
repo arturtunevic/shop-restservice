@@ -30,19 +30,7 @@ public class Customer {
     public Customer() {
     }
 
-    /**
-     * This is parameterized Customer constructor
-     *
-     * @param customerID contains customer ID
-     * @param name contains customer name
-     * @param surname contains customer surname
-     */
-    public Customer(int customerID, String name, String surname) {
-        this.customerID = customerID;
-        this.name = name;
-        this.surname = surname;
-    }
-
+    
     /**
      * This function returns is used to retrieve customer ID
      *

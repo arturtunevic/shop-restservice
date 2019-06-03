@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * This is DAO interface
  * @author Tomas
+ * @author Gintas
  */
 public interface DAO<T> {
     

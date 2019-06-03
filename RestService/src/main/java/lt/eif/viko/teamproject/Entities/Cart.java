@@ -8,17 +8,20 @@ package lt.eif.viko.teamproject.Entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.net.URI;
 import javax.ws.rs.core.Link;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * This is cart entity that contains information about items bought
  *
  * @author s028945
  */
+@XmlRootElement(name = "Cart")
 public class Cart {
 
     private int cartID;
     private int quantity;
     private int itemID;
+    private int saleID;
     private Link link;
 
     /**
@@ -80,6 +83,24 @@ public class Cart {
      */
     public void setItemID(int itemID) {
         this.itemID = itemID;
+    }
+
+    /**
+     * Method to get sale ID
+     *
+     * @return id of cart
+     */
+    public int getSaleID() {
+        return saleID;
+    }
+
+    /**
+     * Method to set sale ID
+     *
+     * @param saleID contains id of sale
+     */
+    public void setSaleID(int saleID) {
+        this.saleID = saleID;
     }
 
     /**

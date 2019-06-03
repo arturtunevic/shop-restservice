@@ -5,7 +5,6 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
-import java.net.URI;
 import java.util.List;
 import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;

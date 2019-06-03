@@ -35,6 +35,7 @@ public class NetworkApplication extends Application {
         singletons.add(new CustomerResource());
         singletons.add(new ItemsResource());
         singletons.add(new SalesResource());
+        //singletons.add(new CartResource());
     }
 
     /**

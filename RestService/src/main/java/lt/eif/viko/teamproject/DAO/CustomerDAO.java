@@ -11,12 +11,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lt.eif.viko.teamproject.Entities.Customer;
 
 /**
  * This class is to manage Customer's data in Database
- * 
+ *
  * @author Tomas
+ * @author Gintas
  */
 public class CustomerDAO implements DAO<Customer> {
 
@@ -36,6 +39,10 @@ public class CustomerDAO implements DAO<Customer> {
         connection = database.getConnection();
     }
 
+    /**
+     * Method to retrieve list of all Customers from database
+     * @return list of customers
+     */
     @Override
     public List<Customer> load() {
         try {
@@ -52,18 +59,16 @@ public class CustomerDAO implements DAO<Customer> {
             }
             return customers;
         } catch (SQLException ex) {
-
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
-    
     /**
-     * 
+     *
      * @param id customer id
-     * @return customer
+     * @return customer object
      */
-    
     @Override
     public Customer get(Object id) {
         int idInt = (int) id;
@@ -78,31 +83,30 @@ public class CustomerDAO implements DAO<Customer> {
             return customer;
 
         } catch (SQLException ex) {
-       //    Logger.getLogger(DAOCountryDb.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
-    
-     /**
+
+    /**
      * insert customer object into DB
      *
-     * @param object
+     * @param object object that is being inserted
      */
     @Override
     public void insert(Customer object) {
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO customer VALUES (" + object.getCustomerID()+ ", '" + object.getName() + "'), '" + object.getSurname()+ "')");
+            statement.executeUpdate("INSERT INTO customer VALUES (" + object.getCustomerID() + ", '" + object.getName() + "'), '" + object.getSurname() + "')");
         } catch (SQLException ex) {
-       
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-     /**
+
+    /**
      * update customer object into DB
      *
-     * @param object
+     * @param object updated object
      */
     @Override
     public void update(Customer object) {
@@ -110,14 +114,14 @@ public class CustomerDAO implements DAO<Customer> {
             statement = connection.createStatement();
             statement.executeUpdate("UPDATE customer SET Surname =" + object.getSurname() + ", Name=" + object.getName() + "' WHERE ID =" + object.getCustomerID());
         } catch (SQLException ex) {
-      
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-  /**
+
+    /**
      * delete customer object from DB
      *
-     * @param object
+     * @param object object that is being deleted
      */
     @Override
     public void delete(Customer object) {
@@ -125,10 +129,8 @@ public class CustomerDAO implements DAO<Customer> {
             statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM customer WHERE ID = " + object.getCustomerID());
         } catch (SQLException ex) {
-           // Logger.getLogger(DAOCountryDb.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
-    
-    
+    }
 
 }
