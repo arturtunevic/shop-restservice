@@ -5,7 +5,6 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
-import java.net.URI;
 import java.util.List;
 import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,50 +13,50 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- * This is entity that contains all items in list
+ * This is SalesList Entity, that contains list of Sale
  *
  * @author s028945
  */
-@XmlRootElement(name = "Items")
-public class ItemList {
+@XmlRootElement(name = "Sales")
+public class SalesList {
 
-    private List<Item> items = null;
+    private List<Sale> sales = null;
     private Link link;
 
     /**
-     * Default constructor for ItemList
+     * Default constructor for SalesList
      */
-    public ItemList() {
+    public SalesList() {
 
     }
 
     /**
-     * This function returns list of all items
+     * This function returns list of all sales
      *
-     * @return list of items
+     * @return list of sales
      */
-    @XmlElementWrapper(name = "items")
-    @XmlElement(name = "item")
-    public List<Item> getItems() {
-        return items;
+    @XmlElementWrapper(name = "sales")
+    @XmlElement(name = "sale")
+    public List<Sale> getSales() {
+        return sales;
     }
 
     /**
-     * This function is used to set list of items to given one
+     * This function is used to set list of sales to given one
      *
-     * @param items list of items
+     * @param sales list of sales
      */
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setSales(List<Sale> sales) {
+        this.sales = sales;
     }
 
     /**
-     * Method for deleting Item from list
+     * Method for deleting Sale from list
      *
-     * @param item is an object of entity Item
+     * @param sale is an object of entity Sale
      */
-    public void deleteFromList(Item item) {
-        items.remove(item);
+    public void deleteFromList(Sale sale) {
+        sales.remove(sale);
     }
 
     /**

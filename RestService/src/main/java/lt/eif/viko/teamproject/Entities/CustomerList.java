@@ -5,18 +5,24 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
+import java.net.URI;
 import java.util.List;
+import javax.ws.rs.core.Link;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * This entity is used to store customer's in a list
  *
  * @author s028945
  */
+@XmlRootElement(name = "Customers")
 public class CustomerList {
 
     private List<Customer> customers = null;
+    private Link link;
 
     /**
      * Default constructor for CustomerList
@@ -41,7 +47,7 @@ public class CustomerList {
      *
      * @param customers list of customers
      */
-    public void setVehicles(List<Customer> customers) {
+    public void setCustomers(List<Customer> customers) {
         this.customers = customers;
     }
 
@@ -52,6 +58,25 @@ public class CustomerList {
      */
     public void deleteFromList(Customer customer) {
         customers.remove(customer);
+    }
+
+    /**
+     * Get link uri
+     *
+     * @return uri of customer list
+     */
+    @XmlElement(name = "link")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class) 
+    public Link getLink() {
+        return link;
+    }
+
+    /**
+     * Method to set link
+     *
+     */
+    public void setLink(Link link) {
+        this.link = link;
     }
 
 }

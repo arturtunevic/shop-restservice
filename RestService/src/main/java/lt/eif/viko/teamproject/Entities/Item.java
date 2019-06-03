@@ -5,37 +5,31 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
+import javax.ws.rs.core.Link;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 /**
  * This is Item entity, that contains information about item
  *
  * @author s028945
  */
+@XmlRootElement(name = "Item")
+@XmlType(propOrder = {"itemID", "itemName", "itemPrice", "itemQuantity", "link"})
 public class Item {
 
     private int itemID;
     private String itemName;
     private double itemPrice;
     private int itemQuantity;
+    private Link link;
 
     /**
      * This is default non-parameterized constructor of Item entity
      */
     public Item() {
-    }
-
-    /**
-     * This is parameterized constructor of Item entity
-     *
-     * @param itemID contains item ID
-     * @param itemName contains item name
-     * @param itemPrice contains item price
-     * @param itemQuantity contains item quantity
-     */
-    public Item(int itemID, String itemName, double itemPrice, int itemQuantity) {
-        this.itemID = itemID;
-        this.itemName = itemName;
-        this.itemPrice = itemPrice;
-        this.itemQuantity = itemQuantity;
     }
 
     /**
@@ -111,13 +105,22 @@ public class Item {
     }
 
     /**
-     * This is toString method for Item
+     * Get link uri
      *
-     * @return item information
+     * @return uri of customer list
      */
-    @Override
-    public String toString() {
-        return "Item{" + "itemID=" + itemID + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemQuantity=" + itemQuantity + '}';
+    @XmlElement(name = "link")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class) 
+    public Link getLink() {
+        return link;
+    }
+
+    /**
+     * Method to set link
+     *
+     */
+    public void setLink(Link link) {
+        this.link = link;
     }
 
 }

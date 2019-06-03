@@ -5,16 +5,24 @@
  */
 package lt.eif.viko.teamproject.Entities;
 
+import java.net.URI;
+import javax.ws.rs.core.Link;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 /**
  * This is Customer entity, that keeps information about customer
  *
  * @author s028945
  */
+@XmlRootElement(name = "Customer")
 public class Customer {
 
     private int customerID;
     private String name;
     private String surname;
+    private Link link;
 
     /**
      * This is empty default constructor
@@ -22,19 +30,7 @@ public class Customer {
     public Customer() {
     }
 
-    /**
-     * This is parameterized Customer constructor
-     *
-     * @param customerID contains customer ID
-     * @param name contains customer name
-     * @param surname contains customer surname
-     */
-    public Customer(int customerID, String name, String surname) {
-        this.customerID = customerID;
-        this.name = name;
-        this.surname = surname;
-    }
-
+    
     /**
      * This function returns is used to retrieve customer ID
      *
@@ -90,13 +86,22 @@ public class Customer {
     }
 
     /**
-     * This is toString function of Customer
+     * Get link uri
      *
-     * @return customer information
+     * @return uri of customer
      */
-    @Override
-    public String toString() {
-        return "Customer{" + "customerID=" + customerID + ", name=" + name + ", surname=" + surname + '}';
+    @XmlElement(name = "link")
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class) 
+    public Link getLink() {
+        return link;
+    }
+
+    /**
+     * Method to set link
+     *
+     */
+    public void setLink(Link link) {
+        this.link = link;
     }
 
 }
