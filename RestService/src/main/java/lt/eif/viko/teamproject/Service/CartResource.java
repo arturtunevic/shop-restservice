@@ -23,6 +23,7 @@ import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import lt.eif.viko.teamproject.DAO.CartDAO;
 import lt.eif.viko.teamproject.Entities.Cart;
+import org.apache.log4j.Logger;
 
 /**
  * Class to represent an object of Cart entity as a resource for WS
@@ -33,6 +34,7 @@ import lt.eif.viko.teamproject.Entities.Cart;
 @Produces("application/xml")
 public class CartResource {
 
+    Logger log;
     CartDAO dao;
     int saleID;
 
@@ -44,6 +46,7 @@ public class CartResource {
      */
     public CartResource() throws ClassNotFoundException, SQLException {
         dao = new CartDAO();
+        log = Logger.getLogger(SalesResource.class);
     }
 
     /**
@@ -55,6 +58,7 @@ public class CartResource {
      */
     public CartResource(int saleID) throws ClassNotFoundException, SQLException {
         dao = new CartDAO();
+        log = Logger.getLogger(SalesResource.class);
         this.saleID = saleID;
     }
 
@@ -64,7 +68,7 @@ public class CartResource {
     /**
      * Method used to get activities list from database
      *
-     * @return an object of class Country
+     * @return an object of class Cart
      */
     @GET
     public List<Cart> loadCart() {
@@ -78,7 +82,7 @@ public class CartResource {
             Link lnk = Link.fromUri(builder.build(saleID) + "/" + cart.getCartID()).rel("self").build();
             cart.setLink(lnk);
         }
-
+        log.info("RESPONSE: GET /cart SUCCESS ");
         return cartList;
     }
 
@@ -96,6 +100,7 @@ public class CartResource {
                 .path(SalesResource.class, "getSaleByID");
         Link lnk = Link.fromUri(builder.build(saleID) + "/cart/" + cart.getCartID()).rel("self").build();
         cart.setLink(lnk);
+        log.info("RESPONSE: GET /{cartID} SUCCESS ");
         return cart;
     }
 
@@ -108,6 +113,7 @@ public class CartResource {
     @Consumes("application/xml")
     public Response createActivity(Cart cart) {
         dao.insert(cart);
+        log.info("RESPONSE: POST /cart SUCCESS ");
         return Response.status(javax.ws.rs.core.Response.Status.CREATED).build();
     }
 
@@ -122,7 +128,7 @@ public class CartResource {
     public Response deleteActivity(@PathParam("cartID") int id) {
         Cart cart = (Cart) dao.get(id);
         dao.delete(cart);
-
+        log.info("RESPONSE: GET /{cartID} SUCCESS: " + id);
         return Response.status(javax.ws.rs.core.Response.Status.OK).build();
     }
 
@@ -136,7 +142,7 @@ public class CartResource {
     @Consumes("application/xml")
     public Response updateActivity(Cart cart) {
         dao.update(cart);
+        log.info("RESPONSE: PUT /{cartID} SUCCESS ");
         return Response.status((javax.ws.rs.core.Response.Status.OK)).build();
     }
-
 }

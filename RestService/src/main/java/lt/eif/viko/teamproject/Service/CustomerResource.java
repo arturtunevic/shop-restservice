@@ -6,7 +6,6 @@
 package lt.eif.viko.teamproject.Service;
 
 import java.sql.SQLException;
-import java.util.logging.FileHandler;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -35,9 +34,6 @@ import org.apache.log4j.Logger;
 public class CustomerResource {
 
     Logger log = Logger.getLogger(CustomerResource.class);
-    private boolean append = true;
-    FileHandler handler;
-
     CustomerDAO dao;
 
     /**
@@ -65,7 +61,7 @@ public class CustomerResource {
         dao = new CustomerDAO();
         CustomerList customers = new CustomerList();
         customers.setCustomers(dao.load());
-        if (customers == null) {
+        if (customers.getCustomers() == null) {
             log.info("RESPONSE: GET /customers FAIL");
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
@@ -118,7 +114,7 @@ public class CustomerResource {
         log.info("POST REQUEST: " + uriInfo.getRequestUri());
         dao.insert(customer);
         Link lnk = Link.fromUri(uriInfo.getPath() + "/" + customer.getCustomerID()).rel("self").build();
-        log.info("RESPONSE: POST /customers SUCCESS:" + customer.getCustomerID());
+        log.info("RESPONSE: POST /customers SUCCESS:" + customer.getName() + " " + customer.getSurname());
         return Response.status(javax.ws.rs.core.Response.Status.CREATED).location(lnk.getUri()).build();
     }
 

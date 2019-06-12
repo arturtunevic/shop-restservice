@@ -22,6 +22,7 @@ import javax.ws.rs.core.UriInfo;
 import lt.eif.viko.teamproject.DAO.ItemDAO;
 import lt.eif.viko.teamproject.Entities.Item;
 import lt.eif.viko.teamproject.Entities.ItemList;
+import org.apache.log4j.Logger;
 
 /**
  * Class to represent an object of class Items as a resource for rest service
@@ -33,6 +34,7 @@ import lt.eif.viko.teamproject.Entities.ItemList;
 public class ItemsResource {
 
     ItemDAO dao;
+    Logger log = Logger.getLogger(ItemsResource.class);
 
     /**
      * Default constructor for item resource
@@ -51,19 +53,25 @@ public class ItemsResource {
      * @return list of all items
      */
     @GET
-    public ItemList getItems() throws SQLException, ClassNotFoundException {
-
+    public Response getItems() throws SQLException, ClassNotFoundException {
+        log.info("GET REQUEST: " + uriInfo.getRequestUri());
         dao = new ItemDAO();
         ItemList items = new ItemList();
         items.setItems(dao.load());
-        Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
-        items.setLink(link);
+        if (items.getItems() == null) {
+            log.info("RESPONSE: GET /items FAIL");
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } else {
+            Link link = Link.fromUri(uriInfo.getPath()).rel("uri").build();
+            items.setLink(link);
 
-        for (Item item : items.getItems()) {
-            Link lnk = Link.fromUri(uriInfo.getPath() + "/" + item.getItemID()).rel("self").build();
-            item.setLink(lnk);
+            for (Item item : items.getItems()) {
+                Link lnk = Link.fromUri(uriInfo.getPath() + "/" + item.getItemID()).rel("self").build();
+                item.setLink(lnk);
+            }
+            log.info("RESPONSE: GET /items SUCCESS ");
+            return Response.ok(items).build();
         }
-        return items;
     }
 
     /**
@@ -74,13 +82,20 @@ public class ItemsResource {
      */
     @GET
     @Path("/{itemID}")
-    public Item getItemByID(@PathParam("itemID") int id) {
+    public Response getItemByID(@PathParam("itemID") int id) {
+        log.info("GET REQUEST: " + uriInfo.getRequestUri());
         Item item = (Item) dao.get(id);
-        UriBuilder builder = UriBuilder.fromResource(ItemsResource.class)
-                .path(ItemsResource.class, "getItemByID");
-        Link link = Link.fromUri(builder.build(id)).rel("self").build();
-        item.setLink(link);
-        return item;
+        if (item == null) {
+            log.info("RESPONSE: GET /{itemID} FAIL: " + id);
+            return Response.status(Response.Status.NOT_FOUND).build();
+        } else {
+            UriBuilder builder = UriBuilder.fromResource(ItemsResource.class)
+                    .path(ItemsResource.class, "getItemByID");
+            Link link = Link.fromUri(builder.build(id)).rel("self").build();
+            item.setLink(link);
+            log.info("RESPONSE: GET /{itemID} SUCCESS: " + id);
+            return Response.ok(item).build();
+        }
     }
 
     /**
@@ -91,8 +106,10 @@ public class ItemsResource {
     @POST
     @Consumes("application/xml")
     public Response createItem(Item item) {
+        log.info("POST REQUEST: " + uriInfo.getRequestUri());
         dao.insert(item);
         Link lnk = Link.fromUri(uriInfo.getPath() + "/" + item.getItemID()).rel("self").build();
+        log.info("RESPONSE: POST SUCCESS: " + item.getItemName());
         return Response.status(javax.ws.rs.core.Response.Status.CREATED).location(lnk.getUri()).build();
     }
 
@@ -105,9 +122,14 @@ public class ItemsResource {
     @DELETE
     @Path("/{itemID}")
     public Response deleteItem(@PathParam("itemID") int id) {
+        log.info("DELETE REQUEST: " + uriInfo.getRequestUri());
         Item item = (Item) dao.get(id);
+        if (item == null) {
+            log.info("RESPONSE: DELETE /{itemID} FAIL");
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         dao.delete(item);
-
+        log.info("RESPONSE: DELETE SUCCESS: " + id);
         return Response.status(javax.ws.rs.core.Response.Status.OK).build();
     }
 
@@ -121,7 +143,13 @@ public class ItemsResource {
     @Path("/{itemID}")
     @Consumes("application/xml")
     public Response updateItem(Item item) {
+        log.info("PUT REQUEST: " + uriInfo.getRequestUri());
+        if (item == null) {
+            log.info("RESPONSE: PUT /{itemID} FAIL");
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         dao.update(item);
+        log.info("RESPONSE: PUT SUCCESS: " + item.getItemName());
         return Response.status((javax.ws.rs.core.Response.Status.OK)).build();
     }
 
