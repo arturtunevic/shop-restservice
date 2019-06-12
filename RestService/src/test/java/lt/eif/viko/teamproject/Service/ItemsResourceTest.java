@@ -92,7 +92,7 @@ public class ItemsResourceTest {
     @Test
     public void testDeleteItem() {
         when().
-                delete("/items/{id}", 1).
+                delete("/items/8").
                 then().
                 statusCode(500);
     }
@@ -106,13 +106,13 @@ public class ItemsResourceTest {
                 .contentType("application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                         + "<Item>\n"
-                        + "    <Item_ID>1</Item_ID>\n"
+                        + "    <Item_ID>7</Item_ID>\n"
                         + "    <Item_name>Tested</Item_name>\n"
                         + "    <item_price>12</item_price>\n"
                         + "    <Item_quantity>99</Item_quantity>\n"
                         + "</Item>").
                 when()
-                .put("/items/1").
+                .put("/items/7").
                 then()
                 .statusCode(200);
     }

@@ -93,9 +93,9 @@ public class CartResourceTest {
     @Test
     public void testDeleteCart() {
         when().
-                delete("/sales/cart/{id}", 1).
+                delete("/sales/cart/10").
                 then().
-                statusCode(500);
+                statusCode(404);
     }
 
     /**

@@ -91,7 +91,7 @@ public class SalesResourceTest {
     @Test
     public void testDeleteSale() {
         when().
-                delete("/sales/{id}", 1).
+                delete("/sales/10").
                 then().
                 statusCode(500);
     }

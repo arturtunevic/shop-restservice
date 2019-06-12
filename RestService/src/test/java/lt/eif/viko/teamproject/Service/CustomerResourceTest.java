@@ -5,14 +5,24 @@
  */
 package lt.eif.viko.teamproject.Service;
 
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+import javax.ws.rs.client.ClientBuilder;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.net.URI;
 import java.net.URL;
+import java.sql.SQLException;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.ext.RuntimeDelegate;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -48,7 +58,7 @@ public class CustomerResourceTest {
      * Test of getCustomers method, of class CustomerResource.
      */
     @Test
-    public void testGetCustomers(){
+    public void testGetCustomers() {
         when().
                 get("/customers").
                 then().
@@ -91,7 +101,7 @@ public class CustomerResourceTest {
     @Test
     public void testDeleteCustomer() {
         when().
-                delete("/customers/{id}", 1).
+                delete("/customers/10").
                 then().
                 statusCode(500);
     }
