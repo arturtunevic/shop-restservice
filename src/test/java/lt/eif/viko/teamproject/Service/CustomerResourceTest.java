@@ -36,12 +36,12 @@ import org.junit.Assume;
  */
 public class CustomerResourceTest {
 
-    @BeforeClass
+    /*@BeforeClass
     public static void setUpClass() throws MalformedURLException, ProtocolException, IOException {
         URL url = new URL("http://localhost:8080/RestService/rest/customers");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-        //connection.connect();
+        connection.connect();
         int code = connection.getResponseCode();
         if (code == 404) {
             Assume.assumeTrue(false);
