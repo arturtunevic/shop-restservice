@@ -32,7 +32,7 @@ public class SalesResourceTest {
         URL url = new URL("http://localhost:8080/RestService/rest/sales");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-        connection.connect();
+        //connection.connect();
         int code = connection.getResponseCode();
         if (code == 404) {
             Assume.assumeTrue(false);
