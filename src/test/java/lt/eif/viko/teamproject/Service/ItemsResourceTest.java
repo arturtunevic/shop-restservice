@@ -31,7 +31,7 @@ public class ItemsResourceTest {
         URL url = new URL("http://localhost:8080/RestService/rest/items");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-        connection.connect();
+        //connection.connect();
         int code = connection.getResponseCode();
         if (code == 404) {
             Assume.assumeTrue(false);
